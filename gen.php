@@ -2,7 +2,7 @@
 
 $config = include("config.php");
 
-define('SRC_FOLDER', 'articles/');
+define('SRC_FOLDER', '_articles/');
 define('DST_FOLDER', 'docs/');
 
 function create_dir_if_not($dir) {
@@ -14,9 +14,9 @@ function create_dir_if_not($dir) {
 function gen_page($src, $dst, $args) {
     ob_start();
     extract($args);
-    include('general/header.php');
+    include('_general/header.php');
     include($src);
-    include('general/footer.php');
+    include('_general/footer.php');
     $content = ob_get_contents();
     ob_end_clean();
     file_put_contents($dst, $content);
@@ -31,17 +31,17 @@ function copy_public($src_path, $dest_path) {
 
 function gen_articles($articles) {
     foreach ($articles as $a) {
-        $src_folder = SRC_FOLDER . $a['folder'];
-        $dst_folder = DST_FOLDER . $a['folder'];
+        $src_folder = SRC_FOLDER . $a['folder'] . '/';
+        $dst_folder = DST_FOLDER . $a['folder'] . '/';
         
         create_dir_if_not($dst_folder);
 
-        if (is_dir($src_folder . '/public')) {
-            copy_public($src_folder.'/public', $dst_folder);
+        if (is_dir($src_folder . 'public/')) {
+            copy_public($src_folder.'public/', $dst_folder);
         }
     
-        gen_page($src_folder . '/index.php',
-                 $dst_folder . '/index.html',
+        gen_page($src_folder . 'index.php',
+                 $dst_folder . 'index.html',
                  [
                      'title' => $a['title'],
                  ]
@@ -50,9 +50,9 @@ function gen_articles($articles) {
 }
 
 create_dir_if_not(DST_FOLDER);
-copy_public('general/public/', DST_FOLDER);
+copy_public('_general/public/', DST_FOLDER);
 
-gen_page('general/index.php',
+gen_page('_general/index.php',
          DST_FOLDER.'/index.html',
          [
             'title' => $config['title'],
@@ -60,7 +60,7 @@ gen_page('general/index.php',
          ]
 );
 
-gen_page('general/404.php',
+gen_page('_general/404.php',
          DST_FOLDER.'/404.html',
          [
             'title' => '404 Page Not Found'
@@ -68,3 +68,4 @@ gen_page('general/404.php',
 );
 
 gen_articles($config['articles']);
+
