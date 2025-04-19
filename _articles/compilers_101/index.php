@@ -27,7 +27,7 @@
     They are simply a series of ones and zeros in the computer's memory, representing a sequence of instructions.
     For example, the following binary sequence could be an instruction to move data to a register:
   </p>
-  <code>10100000</code>
+  <div class="snippet">10100000</div>
   <p>
     However, this format is difficult for humans to understand.
     Moreover, computer instructions are limited to basic tasks like adding numbers or storing values in memory.
@@ -50,16 +50,16 @@
     For instance, one can define a procedure that counts from 0 up to any number:
   </p>
   
-<pre><code>procedure count(n) {
+<div class="snippet">procedure count(n) {
     for i = 0 to n {
         print i;
     }
-}</code></pre>
+}</div>
 
     <p>And then, one can use this procedure as a basic operation without caring about its internals:</p>
     
-<pre><code>count(10);
-count(5);</code></pre>
+<div class="snippet">count(10);
+count(5);</div>
 
     <p>In addition, programming languages abstract away from the differences between hardware architectures. They aim
     to be platform independent. Once you have written an algorithm in the programming language, it can be run
@@ -110,18 +110,13 @@ count(5);</code></pre>
     While doing this, the parser also finds syntax errors and outputs them for users to correct.</p>
     <p>A language may have a syntax rule for expressions.
     This rule may define expressions as two numbers followed by an operator:</p>
-    <code>
-        expression -> number number operator
-    </code>
+    <div class="snippet">expression -> number number operator</div>
     <p>So, the parser must somehow mark two consecutive numbers and an operator as part of the 'expression' rule.
     For example, the parser could encounter the following token sequence:</p>
-    <code>
-        '{' '9' '3' '+' 'while'
-    </code>
+    <div class="snippet">'{' '9' '3' '+' 'while'</div>
     <p>In this case, it would group the tokens '9' '3' '+' as part of the 'expression':</p>
-<pre><code>     / expression  \
-'{'  | '9' '3' '+' |  'while'
-</code></pre>
+<div class="snippet">     / expression \
+'{'  | '9' '3' '+' |  'while'</div>
     <p>Parsers usually use tree data structures to group tokens, and then pass the grouped tokens to the semantic analysis step.</p>
 </section>
 
@@ -130,10 +125,9 @@ count(5);</code></pre>
     <p>The semantic analysis stage checks the meaning of the program. It inspects declarations
     and ensures type consistency. For example, a program may declare a string variable and
     try to use it in an arithmetic expression, which is meaningless:</p>
-<pre><code>var str: string = "String literal";
+<div class="snippet">var str: string = "String literal";
 var num: integer = 42;
-num - str; // <- Type error!
-</code></pre>
+num - str; // <- Type error!</div>
     <p>If the program passes this stage, the compiler will move on to the optimization phase.</p>
 
 </section>
@@ -143,7 +137,7 @@ num - str; // <- Type error!
     <p>The compiler can sometimes optimize source code without changing its intended logic.
     There are many robust optimization techniques available. For example, one of the simplest optimizations
     is constant folding. It precalculates expressions whose operands are known at compile time:</p>
-    <code>a = 3 * 4 + 2; -becomes-> a = 14;</code>
+    <div class="snippet">a = 3 * 4 + 2; -becomes-> a = 14;</div>
 
 </section>
 

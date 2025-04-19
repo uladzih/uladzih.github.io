@@ -86,6 +86,15 @@ ul {
     list-style: none;
 }
 
+ul.marked {
+    list-style: inside;
+    list-style-type: square;
+}
+
+ul.marked li {
+    padding-bottom: initial;
+}
+
 a.link,
 .logo div {
     text-decoration: none;
@@ -100,18 +109,21 @@ a.link:hover,
     background: var(--color-accent);
 }
 
-section img {
+section img,
+section video {
     display: block;
     margin: 0 auto;
     margin-bottom: 1.5em;
     max-width: 100%;
 }
 
-section img.horizontal {
+section img.horizontal,
+section video.horizontal {
     max-height: 60dvh;
 }
 
-section img.vertical {
+section img.vertical,
+section video.vertical {
     max-width: 650px
 }
 
@@ -135,29 +147,6 @@ section img.vertical {
 }
 
 /*
-body {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: var(--color-2);
-    color: var(--color-3);
-    font-size: min(1.5rem, 2vmax);
-    font-family: Tahoma, sans-serif;
-    row-gap: 1em;
-    padding: 1em;
-}
-
-header, main {
-    max-width: 46em;
-    width: 100%;
-}
-
-main {
-    flex: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 3em;
-}
 
 article h1,
 article h2,
@@ -204,15 +193,6 @@ article table {
     margin: 0 auto;
 }
 
-ul.marked {
-    list-style: inside;
-    list-style-type: disc;
-}
-
-ul.marked li {
-    padding-bottom: initial;
-}
-
 th {
     padding-bottom: 1em;
 }
@@ -220,25 +200,6 @@ th {
 th, td {
     max-width: 12em;
     text-align: center;
-}
-
-.snippet {
-    color: var(--color-2);
-    background: var(--color-3);
-    border-radius: 10px;
-    padding: 1em;
-    width: 100%;
-    white-space: preserve;
-    margin: 1em 0 1.5em 0;
-    font-size: 0.85em;
-    font-weight: bold;
-    font-family: monospace;
-    word-spacing: 0.25em;
-    cursor: pointer;
-    box-shadow: 0.25em 0.5em 0.5em -5px var(--color-3);
-    overflow-x: auto;
-    text-wrap: nowrap;
-    scrollbar-color: var(--color-2) transparent;
 }
 
 .snippet:hover {
