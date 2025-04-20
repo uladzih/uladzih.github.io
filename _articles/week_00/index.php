@@ -75,3 +75,14 @@ I've read the <a class="link" href="https://learnopengl.com/Getting-started/Shad
   </p>
 </section>
 
+<section>
+  <h2>Day 0x02. Textures.</h2>
+  
+  <p>I've completed the <a class="link" href="https://learnopengl.com/Getting-started/Textures">"Textures"</a> lesson and successfully drawn a texture on my rectangle:
+  </p>
+  
+  <img src="textured.png" class="horizontal"/>
+  
+  <p>I've also learned more about texture coordinates, texture wrapping and filtering, mipmaps, and using textures in shaders.
+  </p>
+</section>
