@@ -71,7 +71,7 @@ I've read the <a class="link" href="https://learnopengl.com/Getting-started/Shad
   <img src="interpolation.png" class="horizontal"/>
   
   <p>
-  Finally, the lesson suggested creating your own shader class. I don't personally like the idea of a single property encapsulation, and since I use C — a language that doesn't support classes — I implemented just a couple of functions that read shader source files and compile them into a shader program.
+  Finally, the lesson suggested creating your own shader class. I don't personally like the idea of a single property encapsulation, and since I use C — a language that doesn't suppor served as a great refresht classes — I implemented just a couple of functions that read shader source files and compile them into a shader program.
   </p>
 </section>
 
@@ -86,3 +86,24 @@ I've read the <a class="link" href="https://learnopengl.com/Getting-started/Shad
   <p>I've also learned more about texture coordinates, texture wrapping and filtering, mipmaps, and using textures in shaders.
   </p>
 </section>
+
+<section>
+  <h2>Day 0x03. Trasformations.</h2>
+  <p>I've read the <a class="link" htrf="https://learnopengl.com/Getting-started/Transformations">"Transformations"</a> lesson and refreshed my linear algebra knowledge. The aricle covers the essentials of vectors, matrices, and their operations, and then maps these mathematical concepts to real-world transformations such as scaling, translating, and rotating objects. Later, the lesson demonstrates how to implement matrix transformations using the glm library. Since glm is designed for C++ and I use C, I picked the cglm library for my implementation:</p>
+  
+  <div class="snippet">mat4 model;
+glm_mat4_identity(model);
+    
+vec3 translation_vec = {-.5f, -.5f, 0.f};
+glm_translate(model, translation_vec);
+    
+vec3 rot_axis = {0.f, 0.f, 1.f};
+glm_rotate(model, glfwGetTime(), rot_axis);
+    
+vec3 scale_vec = {.5f, .5f, 0.f};
+glm_scale(model, scale_vec);</div>
+
+  <video src="rotating.webm" controls loop class="horizontal">
+  </video>
+</section>
+
