@@ -124,6 +124,58 @@ glm_scale(model, scale_vec);</div>
   </video>
 </section>
 
+<section>
+  <h2>Day 0x04. Coordinate Spaces.</h2>
+  <p>
+I've got acquainted myself with the <a class="link" href="https://learnopengl.com/Getting-started/Coordinate-Systems">"Coordinate Systems"</a> article. It explains what coordinate spaces are and how to transform vertices from one space to another. Essentially, each vertex goes through the following spaces:
+  </p>
+  
+  <ul class="marked">
+      <li>Local space</li>
+      <li>World space (via the Model matrix)</li>
+      <li>View space (via the View matrix)</li>
+      <li>Clip space (via the Projection matrix)</li>
+      <li>Screen space (via the internal Viewport transform)</li>
+  </ul>
+  
+  <p>
+The article then teaches two kinds of projection matrices: perspective and orthographic. Finally, it shows how coordinate spaces work in practice.
+  </p>
+  
+  <p>
+I've implemented all three kinds of matrices using the acquired knowledge and drawn the rectangle in perspective, slightly rotated:
+  </p>
+  
+  <div class="snippet">mat4 model;
+glm_mat4_identity(model);
+vec3 rot_axis = {1.f, 0.f, 0.f};
+glm_rotate(model, glm_rad(-60.f), rot_axis);
+    
+mat4 view;
+glm_mat4_identity(view);
+vec3 trans_vec = {0.f, 0.f, -2.f};
+glm_translate(view, trans_vec);
+    
+mat4 proj;
+glm_perspective(glm_rad(90.f), 8.f/6.f, 0.1f, 100.f, proj);</div>
+
+  <img src="perspective.png" class="horizontal"/>
+  
+  <p>
+In the end, I tried to turn the rectangle into a cube, but it went not so well. This happened because OpenGL doesn't enable z-buffer checking by default:
+  </p>
+  
+  <img src="cube-no-buf.png" class="horizontal"/>
+  
+  <p>
+These two simple lines fixed the problem:
+  </p>
+  
+  <div class="snippet">glEnable(GL_DEPTH_TEST);</div>
+  <div class="snippet">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</div>
+  
+  <img src="cube-with-buf.png" class="horizontal"/>
+</section>
         </main>
     <footer>
         <p>uladzih &copy; 2025 All rights reserved.</p>
