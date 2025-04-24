@@ -159,3 +159,14 @@ These two simple lines fixed the problem:
   
   <img src="cube-with-buf.png" class="horizontal"/>
 </section>
+
+<section>
+  <h2>Day 0x05. Things get interesing.</h2>
+  
+  <p>
+I've skimmed through the <a class="link" href="https://learnopengl.com/Getting-started/Camera">"Camera"</a> chapter since it mainly talks about 3D concepts but I can't wait already to start my own 2D game. Instead, I've decided to peek in <a class="link" href="https://learnopengl.com/In-Practice/2D-Game/Breakout">"In Practice"</a> chapters and adapt something from them in my game.
+  </p>
+  
+  <p>
+  </p>
+</section>
