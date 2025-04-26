@@ -1,0 +1,38 @@
+.support {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+
+.support-entry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.support-descr {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.support-kind {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+.support-qr {
+    flex-grow: 1;
+}
+
+.support-qr img {
+    width: 128px;
+    height: 128px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}

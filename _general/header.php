@@ -6,6 +6,7 @@
         <title><?php echo $title;?></title>
         <link rel="icon" href="/favicon.ico">
         <link rel="stylesheet" href="/styles.css">
+        <link rel="stylesheet" href="/support.css">
     </head>
     <header>
         <a href="/" class="logo">
