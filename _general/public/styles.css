@@ -142,7 +142,6 @@ section video.vertical {
     font-size: 0.85em;
     font-weight: bold;
     font-family: monospace;
-    word-spacing: 0.25em;
     cursor: pointer;
     box-shadow: 0.25em 0.5em 0.5em -5px var(--color-text);
     overflow-x: auto;

@@ -179,14 +179,143 @@ These two simple lines fixed the problem:
 </section>
 
 <section>
-  <h2>Day 0x05. Things get interesing.</h2>
+  <h2>Day 0x05. Things get interesting.</h2>
   
   <p>
 I've skimmed through the <a class="link" href="https://learnopengl.com/Getting-started/Camera">"Camera"</a> chapter since it mainly talks about 3D concepts but I can't wait already to start my own 2D game. Instead, I've decided to peek in <a class="link" href="https://learnopengl.com/In-Practice/2D-Game/Breakout">"In Practice"</a> chapters and adapt something from them in my game.
   </p>
   
   <p>
+This day I've started writing my own code. I've made resources module that compiles shader programs, reads and loads textures. For now, it provides two public functions: 
   </p>
+  <div class="snippet">bool  res_create_shader(const char *vertex_file,
+                        const char *fragment_file,
+                        unsigned int *result_shader_id);
+
+bool  res_create_texture(const char *texture_file,
+                         unsigned int *result_texture_id);</div>
+
+  <p>
+This allowed me to unclutter a bit main.c module. Then, I've managed to draw semi-transparent textures properly using the following lines:
+  </p>
+
+  <div class="snippet">glEnable(GL_BLEND);
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);</div>
+
+  <p>
+Now there are no more annoying black borders:
+  </p>
+
+  <img src="alpha-render.png" class="horizontal"/>
+
+  <p>
+Finally, I went for an evening walk to clear my mind and think about how to abstract sprite drawing process.
+  </p>
+</section>
+
+<section>
+  <h2>Day 0x06. Sprites.</h2>
+  
+  <p>
+I am continuing to unclutter the main.c module while trying to find practical abstractions for sprites. My first attempt is to encapsulate everything needed for drawing a single object within a struct:
+  </p>
+
+  <div class="snippet">struct sprite {
+    float x;
+    float y;
+    float width;
+    float height;
+    
+    unsigned int vao;
+    unsigned int shader;
+    unsigned int tex;
+};</div>
+
+  <p>
+Then, I created a function that initializes this struct:
+  </p>
+  
+  <div class="snippet">static bool sprite_init(struct sprite *s) {
+    s->vao = quad_init();
+    
+    if (!res_create_shader("shader.vs", "shader.fs", &s->shader)) {
+        return false;
+    }
+    glUseProgram(s->shader);
+    glUniform1i(glGetUniformLocation(s->shader, "tex"), 0);
+    glUseProgram(0);
+    
+    if (!res_create_texture("armveh.png", &s->tex)) {
+        return false;
+    }
+
+    s->x = 0.f;
+    s->y = 0.f;
+    s->width = 8.f;
+    s->height = 4.f;
+    
+    return true;
+}</div>
+
+  <p>And drawing function:</p>
+
+  <div class="snippet">static void sprite_draw(struct sprite *s) {
+    glUseProgram(s->shader);
+    
+    int model_loc = glGetUniformLocation(s->shader, "model");
+    int view_loc = glGetUniformLocation(s->shader, "view");
+    int proj_loc = glGetUniformLocation(s->shader, "proj");
+    
+    mat4 model;
+    glm_mat4_identity(model);
+    vec3 pos_vec = {s->x, s->y, 0.f};
+    glm_translate(model, pos_vec);
+    vec3 scale_vec = {s->width, s->height, 0.f};
+    glm_scale(model, scale_vec);
+    
+    mat4 view;
+    glm_mat4_identity(view);
+    
+    glUniformMatrix4fv(
+        model_loc, 1, GL_FALSE, (const GLfloat*) model
+    );
+    glUniformMatrix4fv(
+        view_loc, 1, GL_FALSE, (const GLfloat*) view
+    );
+    glUniformMatrix4fv(
+        proj_loc, 1, GL_FALSE, (const GLfloat*) game_state.proj_matrix
+    );
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, s->tex);
+    glBindVertexArray(s->vao);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+}</div>
+
+  <p>
+To test things, I am updating x and y coordinates inside loop and draw sprite:
+  </p>
+
+  <div class="snippet">while (!glfwWindowShouldClose(window)) {
+    glfwPollEvents();
+    process_input(window);
+        
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    car.x += 0.025f;
+    car.y += 0.025f;
+    sprite_draw(&car);
+
+    glfwSwapBuffers(window);
+}</div>
+
+  <p>
+And it works!
+  </p>
+
+  <video src="sprite-move.mp4" class="horizontal" controls loop></video>
 </section>
         </main>
     <footer>
