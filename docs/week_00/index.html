@@ -11,8 +11,9 @@
     <header>
         <a href="/" class="logo">
             <img alt="Shy Vampire" src="/vampire.webp" />
-            <div>Uladzih's blog</div>
+            <div>uladzih::blog</div>
         </a>
+        <div>My dev journey notes</div>
     </header>
     <main>
 

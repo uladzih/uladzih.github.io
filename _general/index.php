@@ -4,8 +4,9 @@
         <?php foreach ($articles as $a) : ?>
 
         <li>
-            <a class="link" href=<?php echo '/'.$a['folder'].'/'; ?> >
-                <?php echo $a['date'] . ': ' . $a['title'] ?>
+            <span><?php echo $a['date'] . ': '; ?></span>
+            <a class="link" href=<?php echo '/'.$a['folder'].'/'; ?>>
+                 <?php echo $a['title']; ?>
             </a>
         </li>
             

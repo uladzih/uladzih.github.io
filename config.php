@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Uladzih\'s blog',
+    'title' => 'uladzih::blog',
     'articles' => [
         [
             'title' => 'Week 0x00',
